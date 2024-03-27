@@ -1,0 +1,56 @@
+{
+  "name": "@peterek/identity",
+  "version": "0.0.0",
+  "description": "Type identity TypeScript/JavaScript helpers",
+  "keywords": [
+    "typescript",
+    "ts",
+    "javascript",
+    "js",
+    "identity",
+    "type"
+  ],
+  "author": "Jiri Peterek <jiri@peterek.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peterekjs/identity/issues"
+  },
+  "homepage": "https://github.com/peterekjs/identity#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterekjs/identity.git"
+  },
+  "engines": {
+    "node": "^20.12.0"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "typesVersions": {
+    ">=5": {
+      "index": ["./dist/index.d.ts"],
+      "vue": ["./dist/vue.d.ts"]
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "typescript": "^5.4.3",
+    "vite": "^5.2.6",
+    "vite-plugin-dts": "^3.8.0"
+  }
+}
