@@ -1,3 +1,9 @@
+type Defined<T> = T extends undefined ? never : T
+type ObjectLike = object & {}
+type FunctionLike = (...args: any[]) => any
+type Assignable = ObjectLike | FunctionLike
+type Primitive = null | undefined | boolean | number | bigint | string | symbol
+
 type Assert = (condition: unknown, message?: string) => asserts condition
 
 type TypeDescription<T, P = T extends object ? keyof T : never> = {
@@ -24,6 +30,11 @@ type TypeFromPropDescriptions<T extends PropDescriptions<unknown>> = T extends P
 
 export type {
   Assert,
+  Assignable,
+  Defined,
+  FunctionLike,
+  ObjectLike,
+  Primitive,
   PropDescriptions,
   TypeDescription,
   TypeFromDescription,
