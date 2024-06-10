@@ -1,8 +1,8 @@
+import type { AnyFunction, Primitive } from 'ts-essentials'
+
 type Defined<T> = T extends undefined ? never : T
 type ObjectLike = object & {}
-type FunctionLike = (...args: any[]) => any
-type Assignable = ObjectLike | FunctionLike
-type Primitive = null | undefined | boolean | number | bigint | string | symbol
+type Assignable = ObjectLike | AnyFunction
 
 type Assert = (condition: unknown, message?: string) => asserts condition
 
@@ -32,7 +32,6 @@ export type {
   Assert,
   Assignable,
   Defined,
-  FunctionLike,
   ObjectLike,
   Primitive,
   PropDescriptions,

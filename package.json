@@ -38,19 +38,31 @@
   },
   "typesVersions": {
     ">=5": {
-      "index": ["./dist/index.d.ts"],
-      "vue": ["./dist/vue.d.ts"]
+      "index": [
+        "./dist/index.d.ts"
+      ],
+      "vue": [
+        "./dist/vue.d.ts"
+      ]
     }
   },
   "scripts": {
     "build": "vite build",
-    "dev": "vite build --watch"
+    "coverage": "vitest run --coverage",
+    "dev": "vite build --watch",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ts-essentials": "^10.0.0"
+  },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
+    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/ui": "^1.6.0",
     "typescript": "^5.4.3",
     "vite": "^5.2.6",
-    "vite-plugin-dts": "^3.8.0"
+    "vite-plugin-dts": "^3.8.0",
+    "vitest": "^1.6.0"
   }
 }

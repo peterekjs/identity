@@ -1,11 +1,12 @@
-import type { Assignable, Defined, FunctionLike, ObjectLike, Primitive, TypeIdentity } from '../definitions'
+import type { AnyFunction, Primitive } from 'ts-essentials'
+import type { Assignable, Defined, ObjectLike, TypeIdentity } from '../definitions'
 import { describeType } from '../describe'
 import { defineIdentity } from '../identity'
 import { mergeTypes } from '../merge'
 
 const $bigint: TypeIdentity<bigint> = defineIdentity(describeType('bigint', (v): v is bigint => typeof v === 'bigint'))
 const $boolean: TypeIdentity<boolean> = defineIdentity(describeType('boolean', (v): v is boolean => typeof v === 'boolean'))
-const $function: TypeIdentity<FunctionLike> = defineIdentity(describeType('function', (v): v is FunctionLike => typeof v === 'function'))
+const $function: TypeIdentity<AnyFunction> = defineIdentity(describeType('function', (v): v is AnyFunction => typeof v === 'function'))
 const $number: TypeIdentity<number> = defineIdentity(describeType('number', (v): v is number => typeof v === 'number'))
 const $object: TypeIdentity<ObjectLike> = defineIdentity(describeType('object', (v): v is object => typeof v === 'object' && !!v))
 const $string: TypeIdentity<string> = defineIdentity(describeType('string', (v): v is string => typeof v === 'string'))

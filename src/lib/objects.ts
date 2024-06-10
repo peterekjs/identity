@@ -1,7 +1,7 @@
 import type { TypeIdentity } from '../definitions'
 import { describeInstance, describeType } from '../describe'
 import { defineIdentity } from '../identity'
-import { $assignable, $function, $object } from './basics'
+import { $assignable } from './basics'
 
 
 const $Map: TypeIdentity<Map<any, any>> = defineIdentity(describeInstance(Map))

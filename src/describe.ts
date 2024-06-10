@@ -1,5 +1,5 @@
 import type { PropDescriptions, TypeDescription, TypeFromPropDescriptions } from './definitions'
-import { assert, hasOwn, isObject } from './helpers'
+import { assert, isObject } from './helpers'
 
 function describeType<T>(name: string, validate: (input: unknown) => input is T, props: (T extends {} ? (keyof T)[] : never[]) = [] as (T extends {} ? (keyof T)[] : never[])): TypeDescription<T> {
   return {
@@ -13,8 +13,8 @@ function describeType<T>(name: string, validate: (input: unknown) => input is T,
   }
 }
 
-function describeInstance<T>(Ctor: new () => T): TypeDescription<T> {
-  const props = Object.keys(Object.getOwnPropertyDescriptors(Ctor).prototype.value) as (keyof T)[]
+function describeInstance<T>(Ctor: new () => T, instantiator: () => T = () => new Ctor()): TypeDescription<T> {
+  const props = Object.keys(instantiator() ?? Object.getOwnPropertyDescriptors(Ctor).prototype.value) as (keyof T)[]
 
   function validate(input: unknown): input is T {
     return input instanceof Ctor
@@ -40,12 +40,14 @@ function describeArray<T extends TypeDescription<any>>(description: T): T extend
     name: `${description.name}[]`,
     validate,
     equals(a, b) {
-      return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((v) => description.equals(v, b))
+      return Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((v, i) => description.equals(v, b[i]))
     },
     get isObject() { return false },
     get props() { return [] as any[] },
   } as T extends TypeDescription<infer S> ? TypeDescription<S[]> : never
 }
+
+const hasOwn = <T extends {}>(input: object, key: keyof T): input is T => Object.hasOwn(input, key)
 
 function describeObject<P extends PropDescriptions<{}>>(name: string, propDescriptions: P): TypeDescription<TypeFromPropDescriptions<P>> {
   assert(isObject(propDescriptions), 'prop descriptions')
