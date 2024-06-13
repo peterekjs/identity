@@ -40,9 +40,6 @@
     ">=5": {
       "index": [
         "./dist/index.d.ts"
-      ],
-      "vue": [
-        "./dist/vue.d.ts"
       ]
     }
   },
