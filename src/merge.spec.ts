@@ -1,6 +1,6 @@
-import { describe, expect, test } from "vitest";
-import { describeType } from "./describe";
-import { mergeTypes } from "./merge";
+import { describe, expect, test } from 'vitest'
+import { describeType } from './describe'
+import { mergeTypes } from './merge'
 
 const validateBoolean = (v: unknown): v is boolean => typeof v === 'boolean'
 const validateNumber = (v: unknown): v is number => typeof v === 'number'

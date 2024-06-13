@@ -1,10 +1,15 @@
 import { describe, expect, test } from 'vitest'
 
-import { describeArray, describeInstance, describeObject, describeType } from './describe'
+import {
+  describeArray,
+  describeInstance,
+  describeObject,
+  describeType,
+} from './describe'
 
 const validateBoolean = (v: unknown): v is boolean => typeof v === 'boolean'
 
-describe('describe', (ctx) => {
+describe('describe', () => {
   test('describeType', () => {
     const booleanType = describeType('boolean', validateBoolean)
 
@@ -58,7 +63,7 @@ describe('describe', (ctx) => {
 
   test('describeObject', () => {
     const objectType = describeObject('foo', {
-      bar: describeType('boolean', validateBoolean)
+      bar: describeType('boolean', validateBoolean),
     })
 
     expect(objectType.name).to.be.eq('foo')

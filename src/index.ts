@@ -9,7 +9,12 @@ export type {
   TypeIdentity,
 } from './definitions'
 export * from './errors'
-export { describeArray, describeInstance, describeObject, describeType } from './describe'
+export {
+  describeArray,
+  describeInstance,
+  describeObject,
+  describeType,
+} from './describe'
 export { defineIdentity } from './identity'
 export { mergeTypes } from './merge'
 

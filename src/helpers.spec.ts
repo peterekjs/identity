@@ -1,11 +1,11 @@
 import { describe, expect, test } from 'vitest'
 import { assert, isObject } from './helpers'
-import { TEST_VALUES, type TestKey } from './test/common'
+import { TEST_VALUES } from './test/common'
 
 describe('helpers', () => {
   test('assert', () => {
     expect(assert(true, 'foo')).to.be.undefined
-    expect(() => assert(false ,'foo')).to.throw('foo')
+    expect(() => assert(false, 'foo')).to.throw('foo')
   })
 
   const isObjectPositiveKeys = new Set<string>([
@@ -23,7 +23,7 @@ describe('helpers', () => {
     'WeakSet',
     'Date',
     'Date (invalid)',
-    'Error'
+    'Error',
   ])
 
   test.each(Object.entries(TEST_VALUES))('isObject@%s', (key, value) => {

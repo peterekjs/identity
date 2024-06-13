@@ -1,5 +1,5 @@
-import { describe, expect, test } from "vitest";
-import { PRIMITIVE_KEYS, TEST_VALUES, drop, pick } from "./common";
+import { describe, expect, test } from 'vitest'
+import { PRIMITIVE_KEYS, TEST_VALUES, drop, pick } from './common'
 
 describe('test/common', () => {
   test('*pick', () => {
@@ -9,7 +9,8 @@ describe('test/common', () => {
   })
 
   test('*drop', () => {
-    const expectedLength = Object.keys(TEST_VALUES).length - PRIMITIVE_KEYS.length
+    const expectedLength =
+      Object.keys(TEST_VALUES).length - PRIMITIVE_KEYS.length
 
     expect([...drop(PRIMITIVE_KEYS)].length).to.be.eq(expectedLength)
   })

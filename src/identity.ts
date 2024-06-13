@@ -19,7 +19,7 @@ function defineIdentity<T>(description: TypeDescription<T>): TypeIdentity<T> {
     is,
     assert,
     ensure,
-    description
+    description,
   }
 }
 

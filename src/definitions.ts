@@ -1,7 +1,7 @@
 import type { AnyFunction, Primitive } from 'ts-essentials'
 
 type Defined<T> = T extends undefined ? never : T
-type ObjectLike = object & {}
+type ObjectLike = NonNullable<unknown> & object
 type Assignable = ObjectLike | AnyFunction
 
 type Assert = (condition: unknown, message?: string) => asserts condition
@@ -23,10 +23,14 @@ type TypeIdentity<T> = {
 
 type PropDescriptions<T> = { [K in keyof T]: TypeDescription<T[K]> }
 
-type TypeFromDescription<T extends TypeDescription<unknown>> = T extends TypeDescription<infer S> ? S : never
-type TypeFromDescriptions<T extends TypeDescription<any>[]> = T[number] extends TypeDescription<infer S> ? S : never
-type TypeFromIdentity<T extends TypeIdentity<unknown>> = T extends TypeIdentity<infer S> ? S : never
-type TypeFromPropDescriptions<T extends PropDescriptions<unknown>> = T extends PropDescriptions<infer S> ? S : never
+type TypeFromDescription<T extends TypeDescription<unknown>> =
+  T extends TypeDescription<infer S> ? S : never
+type TypeFromDescriptions<T extends TypeDescription<any>[]> =
+  T[number] extends TypeDescription<infer S> ? S : never
+type TypeFromIdentity<T extends TypeIdentity<unknown>> =
+  T extends TypeIdentity<infer S> ? S : never
+type TypeFromPropDescriptions<T extends PropDescriptions<unknown>> =
+  T extends PropDescriptions<infer S> ? S : never
 
 export type {
   Assert,

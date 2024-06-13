@@ -21,7 +21,9 @@ const TEST_VALUES = {
   'undefined': void 0,
 
   'function': function () {},
-  'function (throws exception)': function () { throw new Error() },
+  'function (throws exception)': function () {
+    throw new Error()
+  },
   'lambda': () => {},
   'lambda (returns value)': () => 0,
   'empty object': {},
@@ -43,22 +45,46 @@ const TEST_VALUES = {
 
 type TestKey = keyof typeof TEST_VALUES
 
-const PRIMITIVE_KEYS: TestKey[] = ['empty string', 'non-empty string', 'zero', 'negative zero', 'integer', 'negative integer', 'float', 'negative float', 'infinity', 'negative infinity', 'NaN', 'bigint', 'boolean (false)', 'boolean (true)', 'symbol', 'null', 'undefined']
+const PRIMITIVE_KEYS: TestKey[] = [
+  'empty string',
+  'non-empty string',
+  'zero',
+  'negative zero',
+  'integer',
+  'negative integer',
+  'float',
+  'negative float',
+  'infinity',
+  'negative infinity',
+  'NaN',
+  'bigint',
+  'boolean (false)',
+  'boolean (true)',
+  'symbol',
+  'null',
+  'undefined',
+]
 
-function *pick(keys: Iterable<TestKey>): Generator<[TestKey, any]> {
+function* pick(keys: Iterable<TestKey>): Generator<[TestKey, unknown]> {
   for (const key of keys) {
     if (Object.hasOwn(TEST_VALUES, key)) yield [key, TEST_VALUES[key]]
   }
 }
-function *drop(keys: Iterable<TestKey>): Generator<[TestKey, any]> {
+function* drop(keys: Iterable<TestKey>): Generator<[TestKey, unknown]> {
   const keysToDrop = new Set(keys)
-  for (const [key, value] of Object.entries(TEST_VALUES) as Iterable<[TestKey, any]>) {
+  for (const [key, value] of Object.entries(TEST_VALUES) as Iterable<
+    [TestKey, unknown]
+  >) {
     if (keysToDrop.has(key)) continue
     yield [key, value]
   }
 }
 
-function testIdentity(identity: TypeIdentity<any>, positiveResultingEntries: Iterable<[TestKey, any]>) {
+function testIdentity(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  identity: TypeIdentity<any>,
+  positiveResultingEntries: Iterable<[TestKey, unknown]>
+) {
   describe(identity.description.name, () => {
     const positive = new Map(positiveResultingEntries)
 
